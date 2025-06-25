@@ -13,29 +13,15 @@ LIGHT_COLOR = (240, 217, 181)  # Light squares
 DARK_COLOR = (181, 136, 99)    # Dark squares
 SELECTED_COLOR = (246, 246, 105)
 MOVE_DOT_COLOR = (106, 246, 105)
-STATUS_BAR_HEIGHT = 40
+STATUS_BAR_HEIGHT = 0  # No status bar now
 
-# Unicode pieces for quick, asset-free rendering
-UNICODE_PIECES = {
-    'P': '♙', 'N': '♘', 'B': '♗', 'R': '♖', 'Q': '♕', 'K': '♔',
-    'p': '♟', 'n': '♞', 'b': '♝', 'r': '♜', 'q': '♛', 'k': '♚'
-}
+# Piece drawing colors
+WHITE_PIECE = (248, 248, 248)
+BLACK_PIECE = (32, 32, 32)
+OUTLINE = (20, 20, 20)
 
 
 # --- Helper functions -------------------------------------------------------
-
-def load_piece_font(size: int) -> pygame.font.Font:
-    """Return a font that contains the Unicode chess piece glyphs."""
-    candidates = [
-        "DejaVu Sans", "Arial Unicode MS", "Symbola", "FreeSerif", None
-    ]  # The final None picks pygame's default font.
-    for name in candidates:
-        try:
-            return pygame.font.SysFont(name, size)
-        except Exception:
-            continue
-    raise RuntimeError("No usable font found for chess pieces")
-
 
 def square_from_mouse(pos):
     """Convert (x, y) in pixels to a python-chess square index."""
@@ -47,8 +33,142 @@ def square_from_mouse(pos):
     return chess.square(file_, 7 - rank_)  # Flip so White is at bottom.
 
 
-def draw_board(screen, board, piece_font, selected_sq=None, legal_dests=set()):
-    """Render board, pieces, and highlights."""
+def generate_piece_images(square_size: int):
+    """Return dict mapping python-chess piece symbols to pygame.Surface.
+
+    The drawings purposely avoid fonts and instead approximate classic Staunton
+    silhouettes with basic geometry (rectangles, circles, polygons).  Each
+    piece is first drawn in `OUTLINE` a few pixels larger, then filled with the
+    inner `WHITE_PIECE` / `BLACK_PIECE` colour so we get a crisp border.
+    """
+
+    images: dict[str, pygame.Surface] = {}
+    s = square_size
+    stroke = max(2, s // 28)  # thickness of black outline
+
+    def o(val: float) -> int:
+        """Scale helper -> int pixel from 0-1 proportion."""
+        return int(val * s)
+
+    for symbol in "PNBRQKpnbrqk":
+        surf = pygame.Surface((s, s), pygame.SRCALPHA)
+        col = WHITE_PIECE if symbol.isupper() else BLACK_PIECE
+
+        def draw_circle(center, rad):
+            pygame.draw.circle(surf, OUTLINE, center, rad + stroke)
+            pygame.draw.circle(surf, col, center, rad)
+
+        def draw_rect(rect):
+            out = pygame.Rect(rect).inflate(stroke * 2, stroke * 2)
+            pygame.draw.rect(surf, OUTLINE, out)
+            pygame.draw.rect(surf, col, rect)
+
+        def draw_polygon(points):
+            pygame.draw.polygon(surf, OUTLINE, points, 0)
+            # shrink polygon slightly toward centroid for fill
+            shrink_pts = [(
+                (p[0] + (s/2 - p[0]) * stroke / max(s*0.5,1)),
+                (p[1] + (s/2 - p[1]) * stroke / max(s*0.5,1))
+            ) for p in points]
+            pygame.draw.polygon(surf, col, shrink_pts, 0)
+
+        up = symbol.upper()
+
+        if up == "P":  # Pawn – rounder, shorter, wider base
+            # Head (slightly bigger and lower)
+            draw_circle((o(0.5), o(0.30)), o(0.16))
+            # Neck (thin ring)
+            draw_rect(pygame.Rect(o(0.44), o(0.34), o(0.12), o(0.04)))
+            # Body (curved impression via stacked rectangles)
+            draw_rect(pygame.Rect(o(0.38), o(0.38), o(0.24), o(0.22)))
+            # Base tiers
+            draw_rect(pygame.Rect(o(0.3), o(0.62), o(0.4), o(0.06)))
+            draw_rect(pygame.Rect(o(0.24), o(0.70), o(0.52), o(0.06)))
+            draw_rect(pygame.Rect(o(0.18), o(0.78), o(0.64), o(0.05)))
+
+        elif up == "R":  # Rook ↗
+            # Body tower
+            draw_rect(pygame.Rect(o(0.32), o(0.3), o(0.36), o(0.46)))
+            # Base slab
+            draw_rect(pygame.Rect(o(0.25), o(0.76), o(0.5), o(0.07)))
+            draw_rect(pygame.Rect(o(0.2), o(0.84), o(0.6), o(0.06)))
+            # Top crenellations – three small rectangles
+            cren_w = o(0.1)
+            gap = o(0.02)
+            y_top = o(0.22)
+            for i in range(3):
+                x = o(0.32) + i * (cren_w + gap)
+                draw_rect(pygame.Rect(x, y_top, cren_w, o(0.08)))
+
+        elif up == "N":  # Knight ↗ (horse head)
+            pts = [
+                (o(0.25), o(0.8)),
+                (o(0.45), o(0.3)),
+                (o(0.35), o(0.22)),
+                (o(0.6), o(0.1)),
+                (o(0.7), o(0.25)),
+                (o(0.55), o(0.35)),
+                (o(0.68), o(0.55)),
+                (o(0.5), o(0.7)),
+            ]
+            draw_polygon(pts)
+            draw_rect(pygame.Rect(o(0.22), o(0.8), o(0.56), o(0.06)))
+
+        elif up == "B":  # Bishop – slimmer neck, wider base, clearer mitre
+            # Mitre head
+            draw_circle((o(0.5), o(0.25)), o(0.15))
+            # Vertical slit – draw thin transparent line
+            pygame.draw.line(surf, (0, 0, 0, 0), (o(0.5), o(0.12)), (o(0.5), o(0.38)), stroke)
+            # Shoulders
+            draw_rect(pygame.Rect(o(0.36), o(0.36), o(0.28), o(0.18)))
+            # Body taper – trapezoid simulated with polygon
+            draw_polygon([
+                (o(0.36), o(0.54)), (o(0.64), o(0.54)), (o(0.58), o(0.64)), (o(0.42), o(0.64))
+            ])
+            # Base
+            draw_rect(pygame.Rect(o(0.3), o(0.66), o(0.4), o(0.07)))
+            draw_rect(pygame.Rect(o(0.24), o(0.75), o(0.52), o(0.05)))
+
+        elif up == "Q":  # Queen – shorter than King, elegant skirt
+            # Crown pearls
+            for x in [0.34, 0.42, 0.5, 0.58, 0.66]:
+                draw_circle((o(x), o(0.15)), o(0.05))
+            # Crown band
+            draw_rect(pygame.Rect(o(0.34), o(0.20), o(0.32), o(0.04)))
+            # Upper body orb
+            draw_circle((o(0.5), o(0.30)), o(0.14))
+            # Braids (three beads down each side)
+            braid_xs = [o(0.3), o(0.7)]
+            for bx in braid_xs:
+                for y_frac in [0.24, 0.32, 0.40]:
+                    draw_circle((bx, o(y_frac)), o(0.04))
+            # Lower gown (flare)
+            draw_polygon([
+                (o(0.34), o(0.38)), (o(0.66), o(0.38)), (o(0.56), o(0.62)), (o(0.44), o(0.62))
+            ])
+            # Base
+            draw_rect(pygame.Rect(o(0.28), o(0.66), o(0.44), o(0.06)))
+            draw_rect(pygame.Rect(o(0.2), o(0.74), o(0.6), o(0.05)))
+
+        elif up == "K":  # King – taller with higher cross and longer body
+            # Cross top
+            draw_rect(pygame.Rect(o(0.48), o(0.08), o(0.04), o(0.12)))
+            draw_rect(pygame.Rect(o(0.44), o(0.12), o(0.12), o(0.04)))
+            # Head orb
+            draw_circle((o(0.5), o(0.26)), o(0.16))
+            # Body (longer than Queen)
+            draw_rect(pygame.Rect(o(0.36), o(0.34), o(0.28), o(0.36)))
+            # Base tiers
+            draw_rect(pygame.Rect(o(0.3), o(0.72), o(0.4), o(0.06)))
+            draw_rect(pygame.Rect(o(0.24), o(0.80), o(0.52), o(0.05)))
+
+        images[symbol] = surf
+
+    return images
+
+
+def draw_board(screen, board, piece_images: dict[str, pygame.Surface], selected_sq=None, legal_dests=set()):
+    """Render board, pieces, and highlights using pre-generated images."""
     # Squares
     for rank in range(8):
         for file in range(8):
@@ -69,10 +189,65 @@ def draw_board(screen, board, piece_font, selected_sq=None, legal_dests=set()):
             # Pieces
             piece = board.piece_at(square)
             if piece:
-                glyph = UNICODE_PIECES[piece.symbol()]
-                text_surface = piece_font.render(glyph, True, (0, 0, 0))
-                text_rect = text_surface.get_rect(center=rect.center)
-                screen.blit(text_surface, text_rect)
+                img = piece_images[piece.symbol()]
+                img_rect = img.get_rect(center=rect.center)
+                screen.blit(img, img_rect)
+
+
+# --- AI helper --------------------------------------------------------------
+
+PIECE_VALUES = {
+    chess.PAWN: 100,
+    chess.KNIGHT: 320,
+    chess.BISHOP: 330,
+    chess.ROOK: 500,
+    chess.QUEEN: 900,
+    chess.KING: 0,
+}
+
+
+def evaluate_material(board: chess.Board) -> int:
+    """Simple material count from White perspective (centipawns)."""
+    score = 0
+    for piece_type in PIECE_VALUES:
+        score += PIECE_VALUES[piece_type] * (
+            len(board.pieces(piece_type, chess.WHITE)) - len(board.pieces(piece_type, chess.BLACK))
+        )
+    return score
+
+
+def negamax(board: chess.Board, depth: int, alpha: int, beta: int) -> int:
+    """Negamax search with alpha-beta pruning."""
+    if depth == 0 or board.is_game_over():
+        eval_score = evaluate_material(board)
+        return eval_score if board.turn == chess.WHITE else -eval_score
+
+    max_eval = -10_000
+    for move in board.legal_moves:
+        board.push(move)
+        score = -negamax(board, depth - 1, -beta, -alpha)
+        board.pop()
+        if score > max_eval:
+            max_eval = score
+        alpha = max(alpha, score)
+        if alpha >= beta:
+            break
+    return max_eval
+
+
+def choose_ai_move(board: chess.Board, depth: int = 2) -> chess.Move:
+    """Return the best move for the current board using simple material search."""
+    best_move = None
+    best_score = -10_000
+    for move in board.legal_moves:
+        board.push(move)
+        score = -negamax(board, depth - 1, -10_000, 10_000)
+        board.pop()
+        if score > best_score:
+            best_score = score
+            best_move = move
+    # Fallback (shouldn't happen) to random
+    return best_move if best_move else random.choice(list(board.legal_moves))
 
 
 # --- Main game loop ---------------------------------------------------------
@@ -82,8 +257,7 @@ def main():
     screen = pygame.display.set_mode((BOARD_SIZE, BOARD_SIZE + STATUS_BAR_HEIGHT))
     pygame.display.set_caption("Chess Tutor – MVP")
 
-    piece_font = load_piece_font(SQUARE_SIZE)
-    status_font = pygame.font.SysFont(None, 24)
+    piece_images = generate_piece_images(SQUARE_SIZE)
     clock = pygame.time.Clock()
 
     board = chess.Board()
@@ -130,7 +304,7 @@ def main():
 
                             # --- Computer move (very weak) ---
                             if not board.is_game_over():
-                                comp_move = random.choice(list(board.legal_moves))
+                                comp_move = choose_ai_move(board, depth=2)
                                 board.push(comp_move)
                     else:
                         # Clicked elsewhere – reset selection
@@ -139,19 +313,17 @@ def main():
 
         # Draw everything
         screen.fill((0, 0, 0))
-        draw_board(screen, board, piece_font, selected_sq, legal_dests)
+        draw_board(screen, board, piece_images, selected_sq, legal_dests)
 
-        # Status bar
-        status_text = ""
+        # Caption instead of status bar (avoids fonts)
         if board.is_game_over():
             if board.is_checkmate():
-                status_text = "You Win!" if board.turn == chess.BLACK else "You Lose!"
+                caption = "You Win!" if board.turn == chess.BLACK else "You Lose!"
             else:
-                status_text = "Draw: " + board.result()
+                caption = "Draw: " + board.result()
         else:
-            status_text = "Your move" if board.turn == chess.WHITE else "Computer's move"
-        status_surface = status_font.render(status_text, True, (0, 0, 0))
-        screen.blit(status_surface, (10, BOARD_SIZE + 10))
+            caption = "Your move" if board.turn == chess.WHITE else "Computer's move"
+        pygame.display.set_caption(f"Chess Tutor – MVP  |  {caption}")
 
         pygame.display.flip()
         clock.tick(FPS)
