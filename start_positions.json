@@ -208,5 +208,405 @@
     "category": "Attacking Theme",
     "description": "Both kings castled on opposite wings – launches pawn storms.",
     "fen": "rnbq1rk1/ppp2ppp/3b4/3p4/3P4/2N1P3/PPPB1PPP/R2QKB1R w KQ - 7 7"
+  },
+  {
+    "id": 31,
+    "name": "Scandinavian Defence – Main Line",
+    "category": "Opening",
+    "description": "Position after 1.e4 d5 2.exd5 Qxd5 3.Nc3 Qa5 – teaches queen activity & development tempo.",
+    "icon": "icons/opening.svg",
+    "fen": "rnb1kbnr/pppppppp/8/q7/4P3/2N5/PPPP1PPP/R1BQKBNR w KQkq - 2 4"
+  },
+  {
+    "id": 32,
+    "name": "Pirc Defence – Classical Setup",
+    "category": "Opening",
+    "description": "Typical structure after 1.e4 d6 2.d4 Nf6 3.Nc3 g6 4.Nf3 Bg7.",
+    "icon": "icons/opening.svg",
+    "fen": "rnbqk2r/ppppppbp/3p1np1/8/3PP3/2N2N2/PPP2PPP/R1BQKB1R w KQkq - 6 5"
+  },
+  {
+    "id": 33,
+    "name": "Modern Defence – Tiger Fianchetto",
+    "category": "Opening",
+    "description": "Black invites large centre and counters with hyper-modern fianchetto.",
+    "icon": "icons/opening.svg",
+    "fen": "rnbqk2r/ppppppbp/5np1/8/3PP3/2N5/PPP2PPP/R1BQKBNR w KQkq - 4 4"
+  },
+  {
+    "id": 34,
+    "name": "Grünfeld Defence – Exchange Variation",
+    "category": "Opening",
+    "description": "Key pawn centre after 1.d4 Nf6 2.c4 g6 3.Nc3 d5 4.cxd5 Nxd5 5.e4 Nxc3 6.bxc3.",
+    "icon": "icons/opening.svg",
+    "fen": "rnbqkb1r/ppp1pppp/5n2/3p4/4P3/2P5/P3PPPP/RNBQKBNR b KQkq - 0 6"
+  },
+  {
+    "id": 35,
+    "name": "King's Indian – Mar del Plata",
+    "category": "Opening",
+    "description": "Razor-sharp opposite-wing attacks starting position.",
+    "icon": "icons/opening.svg",
+    "fen": "r1bq1rk1/pp2ppbp/1np2np1/2pp4/2PP4/2N1PN2/PPQN1PPP/2KR1B1R w - - 8 9"
+  },
+  {
+    "id": 36,
+    "name": "Nimzo-Indian – Classical 4.Qc2",
+    "category": "Opening",
+    "description": "Illustrates hanging-pawn potential and bishop pair ideas.",
+    "icon": "icons/opening.svg",
+    "fen": "rnbqk2r/ppp1ppbp/6p1/8/3P4/2N2N2/PPQ1PPPP/R1B1KB1R b KQkq - 4 5"
+  },
+  {
+    "id": 37,
+    "name": "Catalan – Closed Main Line",
+    "category": "Opening System",
+    "description": "White's long-range bishop tests black's queenside setup.",
+    "icon": "icons/opening.svg",
+    "fen": "r1bqk2r/ppp1bppp/2n1pn2/8/2PP4/2N1PN2/PP3PPP/R1BQKB1R w KQkq - 4 6"
+  },
+  {
+    "id": 38,
+    "name": "Slav Defence – Meran Structure",
+    "category": "Pawn Structure",
+    "description": "Typical triangle pawn formation and minority-attack ideas.",
+    "icon": "icons/structure.svg",
+    "fen": "r1bq1rk1/pp2bppp/2nppn2/2p5/2PP4/2N1PN2/PP2BPPP/R1BQ1RK1 w - - 0 9"
+  },
+  {
+    "id": 39,
+    "name": "Dutch Defence – Stonewall",
+    "category": "Opening System",
+    "description": "Pawn wall d5-e6-f5 restricts centre; learn light-square strategy.",
+    "icon": "icons/opening.svg",
+    "fen": "rnbqkb1r/pppp1ppp/5n2/3Pp3/5P2/2N5/PPP1P1PP/R1BQKBNR b KQkq - 1 4"
+  },
+  {
+    "id": 40,
+    "name": "Alekhine Defence – Four Pawns Attack",
+    "category": "Opening Gambit",
+    "description": "White grabs space with four central pawns; black counter-punches.",
+    "icon": "icons/gambit.svg",
+    "fen": "rnbqkb1r/pppp1ppp/8/4p3/PPPP4/8/5PPP/RNBQKBNR b KQkq - 0 4"
+  },
+  {
+    "id": 41,
+    "name": "Evans Gambit Accepted",
+    "category": "Opening Gambit",
+    "description": "Romantic pawn sacrifice in Italian Game (…Bxb4 4.c3 Ba5 5.d4).",
+    "icon": "icons/gambit.svg",
+    "fen": "r1bqk1nr/pppp1ppp/2n5/ba2p3/3PP3/2P2N2/PP3PPP/RNBQKB1R w KQkq - 6 6"
+  },
+  {
+    "id": 42,
+    "name": "Queen's Indian Defence – 4.g3",
+    "category": "Opening",
+    "description": "Hyper-modern fianchetto controlling light squares.",
+    "icon": "icons/opening.svg",
+    "fen": "rnbqk2r/ppp1ppbp/3p1np1/8/2PP4/2N1PN2/PP2BPP1/R1BQK2R b KQkq - 1 5"
+  },
+  {
+    "id": 43,
+    "name": "Petroff Defence – Classical",
+    "category": "Opening",
+    "description": "Symmetrical knights illustrate equality battle.",
+    "icon": "icons/opening.svg",
+    "fen": "rnbqkb1r/pppp1ppp/5n2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3"
+  },
+  {
+    "id": 44,
+    "name": "French Defence – Tarrasch 3.Nd2 c5",
+    "category": "Opening",
+    "description": "Isolated pawn themes and counter-attacks central tension.",
+    "icon": "icons/opening.svg",
+    "fen": "rnbqkbnr/pp2pppp/8/2ppP3/3P4/8/PPP1NPPP/RNBQKB1R w KQkq - 0 5"
+  },
+  {
+    "id": 45,
+    "name": "Sicilian Dragon – Yugoslav 9.Bc4",
+    "category": "Opening",
+    "description": "Famous opposite-side castling attack race.",
+    "icon": "icons/opening.svg",
+    "fen": "r1bq1rk1/pp2ppbp/2n2np1/2pp4/2BPPB2/2N2N2/PP2QPPP/R3K2R b KQ - 8 9"
+  },
+  {
+    "id": 46,
+    "name": "Sicilian – Sveshnikov Main",
+    "category": "Opening",
+    "description": "Dynamic e6-d6 structure and weak d5 square.",
+    "icon": "icons/opening.svg",
+    "fen": "r1bqkb1r/pp3ppp/2n1pn2/1Np5/3P4/5N2/PPP1BPPP/R1BQK2R b KQkq - 3 7"
+  },
+  {
+    "id": 47,
+    "name": "English Opening – Four Knights",
+    "category": "Opening",
+    "description": "Balanced development – good for positional manoeuvres.",
+    "icon": "icons/opening.svg",
+    "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/2PP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq - 4 4"
+  },
+  {
+    "id": 48,
+    "name": "Réti Opening – Kingside Fianchetto",
+    "category": "Opening System",
+    "description": "Demonstrates flank development & central pressure.",
+    "icon": "icons/opening.svg",
+    "fen": "rnbqkbnr/pppppppp/8/8/2P5/5N2/PP1PPPBP/RNBQK2R b KQkq - 2 2"
+  },
+  {
+    "id": 49,
+    "name": "Modern Benoni – Taimanov",
+    "category": "Opening",
+    "description": "Imbalanced pawn structure with e4/c4 vs d6/e6.",
+    "icon": "icons/opening.svg",
+    "fen": "rnbqk2r/pp3ppp/2p1pn2/3p4/P1PP4/2N2N2/1P2PPPP/R1BQKB1R w KQkq - 2 6"
+  },
+  {
+    "id": 50,
+    "name": "Queen's Gambit Accepted – Classical",
+    "category": "Opening",
+    "description": "Black gives c-pawn, aims for …c5 break.",
+    "icon": "icons/opening.svg",
+    "fen": "rnbqkbnr/pp3ppp/8/2pp4/3P4/2N2N2/PPP1PPPP/R1BQKB1R w KQkq - 2 5"
+  },
+  {
+    "id": 51,
+    "name": "Vienna Gambit – Main Line",
+    "category": "Opening Gambit",
+    "description": "Sharp pawn sacrifice leading to early piece activity.",
+    "icon": "icons/gambit.svg",
+    "fen": "rnbqkb1r/pppp1ppp/5n2/4p3/2BPP3/5N2/PPP2PPP/RNBQK2R b KQkq - 3 4"
+  },
+  {
+    "id": 52,
+    "name": "Scotch Game – Mieses Variation",
+    "category": "Opening",
+    "description": "Open centre – perfect for tactical themes.",
+    "icon": "icons/opening.svg",
+    "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/3PP3/5N2/PPP2PPP/RNBQKB1R b KQkq - 2 3"
+  },
+  {
+    "id": 53,
+    "name": "Semi-Tarrasch Defence",
+    "category": "Pawn Structure",
+    "description": "Isolated d-pawn framework demonstrates active piece play.",
+    "icon": "icons/structure.svg",
+    "fen": "rnbqk2r/pp2ppbp/2pp1np1/8/2PP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq - 2 6"
+  },
+  {
+    "id": 54,
+    "name": "King's Gambit – Fischer Defence",
+    "category": "Opening Trap",
+    "description": "Defensive system that neutralises King's Gambit while keeping pawn.",
+    "icon": "icons/gambit.svg",
+    "fen": "rnbqkbnr/pppp1ppp/8/4p3/5P2/8/PPPPP1PP/RNBQKBNR b KQkq - 1 2"
+  },
+  {
+    "id": 55,
+    "name": "Sicilian Alapin – 2.c3",
+    "category": "Opening System",
+    "description": "Anti-Sicilian line aiming for strong centre with d4.",
+    "icon": "icons/opening.svg",
+    "fen": "rnbqkbnr/pp1ppppp/8/8/8/2P5/PP1PPPPP/RNBQKBNR b KQkq - 0 2"
+  },
+  {
+    "id": 56,
+    "name": "Grob Attack – Early h4",
+    "category": "Opening Fun",
+    "description": "Unorthodox line teaching punishment of premature wing advances.",
+    "icon": "icons/opening.svg",
+    "fen": "rnbqkbnr/pppppppp/8/8/7P/8/PPPPPPP1/RNBQKBNR b KQkq - 0 1"
+  },
+  {
+    "id": 57,
+    "name": "Philidor Defence – Hanham",
+    "category": "Opening",
+    "description": "Solid but passive; shows cramped positions management.",
+    "icon": "icons/opening.svg",
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 1"
+  },
+  {
+    "id": 58,
+    "name": "Isolated Queen Pawn Middle-Game",
+    "category": "Pawn Structure",
+    "description": "IQP central themes: outposts, activity vs minority targeting.",
+    "icon": "icons/structure.svg",
+    "fen": "r1bq1rk1/pp3ppp/2n1p3/3p4/1b1P4/2N1PN2/PP2BPPP/R1BQ1RK1 w - - 0 9"
+  },
+  {
+    "id": 59,
+    "name": "Hanging Pawns Structure",
+    "category": "Pawn Structure",
+    "description": "c- and d-pawns advanced; dynamic piece play.",
+    "icon": "icons/structure.svg",
+    "fen": "r2q1rk1/pp1bppbp/2n3p1/3p4/2PP4/2N1PN2/PP2BPPP/R1BQ1RK1 w - - 0 9"
+  },
+  {
+    "id": 60,
+    "name": "Closed Centre – French Chain",
+    "category": "Pawn Structure",
+    "description": "Demonstrates manoeuvring behind locked pawns.",
+    "icon": "icons/structure.svg",
+    "fen": "rnbqkbnr/ppp2ppp/4p3/3pP3/3P4/8/PPP2PPP/RNBQKBNR b KQkq - 0 4"
+  },
+  {
+    "id": 61,
+    "name": "Classic Minority Attack Setup",
+    "category": "Pawn Structure",
+    "description": "White rook on c1 preparing b4-b5 vs black c-pawn.",
+    "icon": "icons/structure.svg",
+    "fen": "r1bq1rk1/pp3ppp/2n1pn2/2pp4/1P1P4/P1N1PN2/3B1PPP/R2Q1RK1 w - - 4 10"
+  },
+  {
+    "id": 62,
+    "name": "Opposite-Coloured Bishops Attack",
+    "category": "Attacking Theme",
+    "description": "Same-wing kings but bishops on opposite colours; emphasises initiative.",
+    "icon": "icons/attack.svg",
+    "fen": "r1bq1rk1/pp2ppbp/2n3p1/8/2BP4/2N1PN2/PP3PPP/R1BQ1RK1 b - - 4 9"
+  },
+  {
+    "id": 63,
+    "name": "Good Knight vs Bad Bishop",
+    "category": "Strategic Theme",
+    "description": "Knight on outpost dominates own-pawn-blocked bishop.",
+    "icon": "icons/attack.svg",
+    "fen": "8/pp3pp1/2n1p3/3pP3/1P1P1N2/2P5/P4PPP/4K3 w - - 0 25"
+  },
+  {
+    "id": 64,
+    "name": "Two Bishops vs Knight & Bishop",
+    "category": "Strategic Theme",
+    "description": "Demonstrates bishop-pair power on open board.",
+    "icon": "icons/attack.svg",
+    "fen": "r2q1rk1/pp1bppbp/3p1np1/2p5/2B5/2NP1N2/PP2QPPP/R1B2RK1 w - - 4 9"
+  },
+  {
+    "id": 65,
+    "name": "Queen Sacrifice – Pillsbury Mate Seed",
+    "category": "Tactical Motif",
+    "description": "Illustrates powerful queen sac followed by minor-piece mate.",
+    "icon": "icons/tactic.svg",
+    "fen": "r1bqkb1r/pppp1ppp/2n2n2/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R w KQkq - 4 4"
+  },
+  {
+    "id": 66,
+    "name": "Windmill Combination Start",
+    "category": "Tactical Motif",
+    "description": "Rook-bishop discovered check repeating.",
+    "icon": "icons/tactic.svg",
+    "fen": "r1bqk2r/pppp1ppp/2n2n2/1Bb1p3/4P3/5N2/PPPP1PPP/RNBQ1RK1 b kq - 4 5"
+  },
+  {
+    "id": 67,
+    "name": "Queen vs Rook Endgame – Philidor Position",
+    "category": "Endgame Technique",
+    "description": "Demonstrates winning technique with queen vs rook.",
+    "icon": "icons/endgame.svg",
+    "fen": "8/8/8/3k4/8/8/3K4/7Q w - - 0 1"
+  },
+  {
+    "id": 68,
+    "name": "Reti Maneuver – Drawn King & Pawn",
+    "category": "Endgame Technique",
+    "description": "Famous zig-zag drawing method against outside pawn.",
+    "icon": "icons/endgame.svg",
+    "fen": "8/8/8/8/5k2/8/4P1K1/8 w - - 0 1"
+  },
+  {
+    "id": 69,
+    "name": "Underpromotion to Knight Mate",
+    "category": "Endgame Tactic",
+    "description": "Shows why underpromoting to knight can be decisive.",
+    "icon": "icons/endgame.svg",
+    "fen": "8/5P1k/8/8/8/8/8/7K w - - 0 1"
+  },
+  {
+    "id": 70,
+    "name": "Fortress – Rook vs Queen",
+    "category": "Endgame Fortress",
+    "description": "Defensive setup where weaker side holds draw.",
+    "icon": "icons/endgame.svg",
+    "fen": "8/8/8/8/4R3/8/5Q2/7K b - - 0 1"
+  },
+  {
+    "id": 71,
+    "name": "Bishop vs Wrong Rook Pawn",
+    "category": "Endgame Principle",
+    "description": "Demonstrates drawing idea with bishop that doesn't control promotion square.",
+    "icon": "icons/endgame.svg",
+    "fen": "8/8/8/8/7P/8/5K2/6kB b - - 0 1"
+  },
+  {
+    "id": 72,
+    "name": "Triangulation Opposition",
+    "category": "Endgame Technique",
+    "description": "King triangulates to gain zugzwang in pawn endgame.",
+    "icon": "icons/endgame.svg",
+    "fen": "8/8/3k4/8/8/8/8/4K3 w - - 0 1"
+  },
+  {
+    "id": 73,
+    "name": "Kingside Attack – H‐file Battery",
+    "category": "Attacking Theme",
+    "description": "Rook and queen doubled on h-file versus fianchetto king.",
+    "icon": "icons/attack.svg",
+    "fen": "rnbq1rk1/ppp2ppp/3b1n2/3p4/3P2B1/2N2N2/PPPBQPPP/R3K2R w KQ - 4 8"
+  },
+  {
+    "id": 74,
+    "name": "Queenside Majority – Passed a-Pawn",
+    "category": "Strategic Theme",
+    "description": "White aims to create outside passed pawn.",
+    "icon": "icons/attack.svg",
+    "fen": "r2q1rk1/1pp2ppp/p1n1pn2/8/P1PP4/1PN2N2/3B1PPP/R2Q1RK1 b - - 0 10"
+  },
+  {
+    "id": 75,
+    "name": "Good Bishop vs Bad Bishop",
+    "category": "Strategic Theme",
+    "description": "Active bishop outside own pawn chain dominates.",
+    "icon": "icons/attack.svg",
+    "fen": "8/pp3pp1/2p1b3/3pP3/1P1P4/2P5/P4PPP/4KB2 w - - 0 28"
+  },
+  {
+    "id": 76,
+    "name": "Domination – Knight Trap",
+    "category": "Tactical Motif",
+    "description": "Piece with no safe squares shows concept of domination.",
+    "icon": "icons/tactic.svg",
+    "fen": "r1bqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1"
+  },
+  {
+    "id": 77,
+    "name": "Bishop Sacrifice on h7 – Template",
+    "category": "Attacking Theme",
+    "description": "'Greek Gift' launching pad before Bxh7+.",
+    "icon": "icons/attack.svg",
+    "fen": "r1bqk2r/ppppbppp/2n2n2/4P3/2B5/2N2N2/PPPP1PPP/R1BQ1RK1 b kq - 4 6"
+  },
+  {
+    "id": 78,
+    "name": "Opposite-Side Castling – Pawn Storm Start",
+    "category": "Attacking Theme",
+    "description": "g-pawn already advanced; teaches timing of pawn pushes.",
+    "icon": "icons/attack.svg",
+    "fen": "r1bq1rk1/pppp1ppp/2n2n2/4p3/2B1P1P1/2N2N2/PPPP1P1P/R1BQ1RK1 b - g3 0 6"
+  },
+  {
+    "id": 79,
+    "name": "Bank Rank Weakness – Lift Created",
+    "category": "Tactical Motif",
+    "description": "Demonstrates creating luft with h3 to avoid back-rank mate.",
+    "icon": "icons/tactic.svg",
+    "fen": "rnbq1rk1/ppppppbp/6p1/8/3PP3/5N1P/PPP2PP1/RNBQ1RK1 b - - 0 6"
+  },
+  {
+    "id": 80,
+    "name": "Deflection – Overloaded Queen",
+    "category": "Tactical Motif",
+    "description": "Piece cannot defend two threats at once; forcing deflection.",
+    "icon": "icons/tactic.svg",
+    "fen": "r1bqk2r/pppp1ppp/2n2n2/4p3/4P3/2N2N2/PPPP1PPP/R1BQ1RK1 w kq - 4 5"
   }
 ] 
