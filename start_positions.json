@@ -1,0 +1,212 @@
+[
+  {
+    "id": 1,
+    "name": "Standard Starting Position",
+    "category": "Opening Fundamentals",
+    "description": "The classical starting arrangement of pieces, foundation for every game.",
+    "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+  },
+  {
+    "id": 2,
+    "name": "Ruy López – Classical Setup",
+    "category": "Opening",
+    "description": "Position after 1.e4 e5 2.Nf3 Nc6 3.Bb5 – showcases central tension and pin on c6 knight.",
+    "fen": "r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3"
+  },
+  {
+    "id": 3,
+    "name": "Italian Game – Giuoco Pianissimo",
+    "category": "Opening",
+    "description": "Calm Italian structure ideal for learning slow build-ups (after 1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5 4.d3).",
+    "fen": "r1bqk1nr/pppp1ppp/2n5/1Bb1p3/2B1P3/3P1N2/PPP2PPP/RNBQK2R w KQkq - 4 5"
+  },
+  {
+    "id": 4,
+    "name": "Sicilian Defence – Najdorf 6.Bg5",
+    "category": "Opening",
+    "description": "Sharp attacking setup common at every level; Black must know typical pawn breaks.",
+    "fen": "rnbq1rk1/pp2ppbp/6p1/n1pp4/3P4/2N1PN2/PPQ1BPPP/R3KB1R w KQ - 6 8"
+  },
+  {
+    "id": 5,
+    "name": "French Defence – Advance Variation",
+    "category": "Opening",
+    "description": "Classic pawn chain after 1.e4 e6 2.d4 d5 3.e5; great for learning space and breaks.",
+    "fen": "rnbqkbnr/ppp1pppp/8/3pP3/3P4/8/PPP2PPP/RNBQKBNR b KQkq - 0 3"
+  },
+  {
+    "id": 6,
+    "name": "Caro-Kann – Short Variation",
+    "category": "Opening",
+    "description": "Solid structure highlighting minority attacks (after 1.e4 c6 2.d4 d5 3.Nc3 dxe4 4.Nxe4 Nf6 5.Nxf6+ exf6).",
+    "fen": "rnbqkb1r/pp2pppp/2p2p2/8/3P4/8/PPP2PPP/RNBQKBNR w KQkq - 0 6"
+  },
+  {
+    "id": 7,
+    "name": "King's Gambit Accepted",
+    "category": "Opening Trap",
+    "description": "Romantic opening where White sacrifices f-pawn for rapid development (1.e4 e5 2.f4 exf4).",
+    "fen": "rnbqkbnr/pppp1ppp/8/4p3/5P2/8/PPPP2PP/RNBQKBNR w KQkq - 0 3"
+  },
+  {
+    "id": 8,
+    "name": "Benko Gambit",
+    "category": "Opening Gambit",
+    "description": "Queenside pawn sacrifice for long-term activity (after 1.d4 Nf6 2.c4 c5 3.d5 b5).",
+    "fen": "rnbqkbnr/pp3ppp/5n2/2pP4/2P5/8/PP2PPPP/RNBQKBNR w KQkq b6 0 4"
+  },
+  {
+    "id": 9,
+    "name": "London System Structure",
+    "category": "Opening System",
+    "description": "Universal setup good for learners – solid pyramid and dark-square bishop on f4.",
+    "fen": "rnbqkbnr/ppp1pppp/8/3p4/3P1B2/5N2/PPP1PPPP/RN1QKB1R b KQkq - 2 3"
+  },
+  {
+    "id": 10,
+    "name": "Queen's Gambit – Carlsbad Structure",
+    "category": "Pawn Structure",
+    "description": "Famous minority-attack pattern (…c6, …d5, White cxd5 exd5).",
+    "fen": "r1bq1rk1/pp2bppp/2n1pn2/2pp4/1P1P4/P1N1PN2/3B1PPP/R2QKB1R w KQ - 0 9"
+  },
+  {
+    "id": 11,
+    "name": "Stonewall Attack Setup",
+    "category": "Opening System",
+    "description": "Characteristic pawn wall on d4-e3-f4-c3 with bishop on d3.",
+    "fen": "rnbqk1nr/pppp1ppp/8/4p3/3PP3/2N2N2/PPP2PPP/R1BQKB1R b KQkq - 2 4"
+  },
+  {
+    "id": 12,
+    "name": "English Opening – Botvinnik Setup",
+    "category": "Opening System",
+    "description": "Plans revolve around e2-e4 break; shows Hedgehog-style pawn formation.",
+    "fen": "rnbqkbnr/pp1ppppp/8/2p5/2P5/2N2N2/PP1PPPPP/R1BQKB1R b KQkq - 1 2"
+  },
+  {
+    "id": 13,
+    "name": "Fool's Mate (Black to Move)",
+    "category": "Checkmate Pattern",
+    "description": "Shortest possible mate; teaches king safety (after 1.f3 e5 2.g4).",
+    "fen": "rnbqkbnr/pppp1ppp/8/4p3/6P1/5P2/PPPPP2P/RNBQKBNR b KQkq - 0 2"
+  },
+  {
+    "id": 14,
+    "name": "Scholar's Mate Threat",
+    "category": "Checkmate Pattern",
+    "description": "White threatens Qxf7# illustrating weak f7 square (after 1.e4 e5 2.Bc4 Nc6 3.Qh5).",
+    "fen": "r1bqkbnr/pppp1ppp/2n5/4pQ2/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 3 3"
+  },
+  {
+    "id": 15,
+    "name": "Smothered Mate Pattern",
+    "category": "Tactical Motif",
+    "description": "Knight delivers mate while king is boxed by its own pieces.",
+    "fen": "rn1qk2r/ppp2ppp/4pn2/3p4/2PP4/2N1P3/PP3PPP/R1BQ1RK1 b kq - 0 8"
+  },
+  {
+    "id": 16,
+    "name": "Back-Rank Mate Setup",
+    "category": "Tactical Motif",
+    "description": "Exposes vulnerability of a king with no luft (lift).",
+    "fen": "6k1/5ppp/8/8/8/8/PPP2PPP/R5K1 w - - 0 1"
+  },
+  {
+    "id": 17,
+    "name": "Greek Gift Sacrifice",
+    "category": "Tactical Motif",
+    "description": "Classic Bxh7+ sacrifice attacking h-file (after typical French position).",
+    "fen": "r1bq1rk1/ppp1bppp/2np1n2/3Np3/3NPB2/5Q2/PPP2PPP/R4RK1 w - - 6 11"
+  },
+  {
+    "id": 18,
+    "name": "Legall's Mate Breaking Point",
+    "category": "Tactical Trap",
+    "description": "Famous rapid-mate trick showing power of central knight fork.",
+    "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/2B1N3/8/PPPP1PPP/RNBQK2R b KQkq - 2 3"
+  },
+  {
+    "id": 19,
+    "name": "Philidor Endgame – Lucena Position",
+    "category": "Endgame Technique",
+    "description": "Key rook endgame winning method (building a bridge).",
+    "fen": "8/6pk/8/8/3R4/8/6PK/8 w - - 0 1"
+  },
+  {
+    "id": 20,
+    "name": "Philidor Endgame – Philidor Draw",
+    "category": "Endgame Technique",
+    "description": "Defensive setup showing third-rank defence to draw pawn-up rook endgame.",
+    "fen": "8/5pk1/8/8/3R4/8/5PK1/8 b - - 0 1"
+  },
+  {
+    "id": 21,
+    "name": "Knight Fork – Classic Family Fork",
+    "category": "Tactical Motif",
+    "description": "Knight attacks king and queen simultaneously (learn fork geometry).",
+    "fen": "rnbqkb1r/pppppppp/8/8/3n4/8/PPP1PPPP/RNBQKBNR w KQkq - 2 3"
+  },
+  {
+    "id": 22,
+    "name": "Pin – Absolute Pin Example",
+    "category": "Tactical Motif",
+    "description": "Pinned knight can't move without exposing king.",
+    "fen": "rnbqkbnr/pppppppp/8/1B6/8/8/PPPPPPPP/RNBQK1NR b KQkq - 2 2"
+  },
+  {
+    "id": 23,
+    "name": "Skewer – Queen/King Skewer",
+    "category": "Tactical Motif",
+    "description": "Higher value piece forced to move exposing lower value one.",
+    "fen": "rnbqk2r/ppppbppp/4pn2/8/1P6/P1N2N2/1BP1PPPP/R1BQK2R w KQkq - 4 6"
+  },
+  {
+    "id": 24,
+    "name": "Zugzwang – Opposition King Endgame",
+    "category": "Endgame Technique",
+    "description": "Side to move is in trouble; ideal to practise key-square knowledge.",
+    "fen": "8/8/8/3K4/4k3/8/8/8 w - - 0 1"
+  },
+  {
+    "id": 25,
+    "name": "Boden's Mate Pattern",
+    "category": "Checkmate Pattern",
+    "description": "Cross-fire bishops mate an uncastled king.",
+    "fen": "6k1/5ppp/8/8/8/8/PPP2PPP/5BKR w - - 0 1"
+  },
+  {
+    "id": 26,
+    "name": "Endgame – King and Pawn vs King (Winning)",
+    "category": "Endgame Technique",
+    "description": "Demonstrates king opposition and pawn promotion.",
+    "fen": "8/8/8/8/4K3/5P2/8/8 w - - 0 1"
+  },
+  {
+    "id": 27,
+    "name": "Endgame – King and Pawn vs King (Drawing)",
+    "category": "Endgame Technique",
+    "description": "Defender to move achieves opposition and draw.",
+    "fen": "8/8/8/8/4k3/5P2/4K3/8 b - - 0 1"
+  },
+  {
+    "id": 28,
+    "name": "Tarrasch Rule – Rook Behind Passed Pawn",
+    "category": "Endgame Principle",
+    "description": "Best placement for a rook supporting its own passed pawn.",
+    "fen": "4rk2/5ppp/8/8/8/8/PP3PPP/4RK2 w - - 0 1"
+  },
+  {
+    "id": 29,
+    "name": "Hedgehog Pawn Structure",
+    "category": "Pawn Structure",
+    "description": "Black's c-, d-, e-, a-, b-pawns; teaches patience and break timing.",
+    "fen": "rbbq1rk1/1pp1ppbp/p1np1np1/8/2PP4/1P3NP1/PB1NPPBP/R2Q1RK1 b - - 0 9"
+  },
+  {
+    "id": 30,
+    "name": "Opposite-Side Castling Race",
+    "category": "Attacking Theme",
+    "description": "Both kings castled on opposite wings – launches pawn storms.",
+    "fen": "rnbq1rk1/ppp2ppp/3b4/3p4/3P4/2N1P3/PPPB1PPP/R2QKB1R w KQ - 7 7"
+  }
+] 
