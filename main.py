@@ -3,6 +3,8 @@ import sys
 import random
 import pygame
 import chess
+import os
+from typing import Optional
 
 # --- Constants --------------------------------------------------------------
 BOARD_SIZE = 640  # Pixels (square board)
@@ -74,53 +76,53 @@ def generate_piece_images(square_size: int):
 
         up = symbol.upper()
 
-        if up == "P":  # Pawn – rounder, shorter, wider base
-            # Head (slightly bigger and lower)
-            draw_circle((o(0.5), o(0.30)), o(0.16))
-            # Neck (thin ring)
-            draw_rect(pygame.Rect(o(0.44), o(0.34), o(0.12), o(0.04)))
-            # Body (curved impression via stacked rectangles)
-            draw_rect(pygame.Rect(o(0.38), o(0.38), o(0.24), o(0.22)))
+        if up == "P":  # Pawn – kept small & simple
+            # Head
+            draw_circle((o(0.5), o(0.33)), o(0.12))
+            # Neck
+            draw_rect(pygame.Rect(o(0.46), o(0.37), o(0.08), o(0.03)))
+            # Body
+            draw_rect(pygame.Rect(o(0.4), o(0.40), o(0.2), o(0.18)))
             # Base tiers
-            draw_rect(pygame.Rect(o(0.3), o(0.62), o(0.4), o(0.06)))
-            draw_rect(pygame.Rect(o(0.24), o(0.70), o(0.52), o(0.06)))
-            draw_rect(pygame.Rect(o(0.18), o(0.78), o(0.64), o(0.05)))
+            draw_rect(pygame.Rect(o(0.32), o(0.59), o(0.36), o(0.05)))
+            draw_rect(pygame.Rect(o(0.26), o(0.67), o(0.48), o(0.05)))
 
-        elif up == "R":  # Rook ↗
-            # Body tower
-            draw_rect(pygame.Rect(o(0.32), o(0.3), o(0.36), o(0.46)))
-            # Base slab
-            draw_rect(pygame.Rect(o(0.25), o(0.76), o(0.5), o(0.07)))
-            draw_rect(pygame.Rect(o(0.2), o(0.84), o(0.6), o(0.06)))
-            # Top crenellations – three small rectangles
-            cren_w = o(0.1)
-            gap = o(0.02)
-            y_top = o(0.22)
-            for i in range(3):
-                x = o(0.32) + i * (cren_w + gap)
-                draw_rect(pygame.Rect(x, y_top, cren_w, o(0.08)))
+        elif up == "R":  # Rook – chunky tower & bold battlements
+            # Body
+            draw_rect(pygame.Rect(o(0.30), o(0.28), o(0.40), o(0.48)))
+            # Arrow-slit windows
+            draw_rect(pygame.Rect(o(0.46), o(0.40), o(0.04), o(0.14)))
+            # Battlements (5 blocks)
+            cren_w = o(0.08)
+            y_top = o(0.18)
+            for i in range(5):
+                x = o(0.30) + i * cren_w
+                draw_rect(pygame.Rect(x, y_top, cren_w - stroke, o(0.09)))
+            # Base
+            draw_rect(pygame.Rect(o(0.24), o(0.78), o(0.52), o(0.05)))
+            draw_rect(pygame.Rect(o(0.18), o(0.85), o(0.64), o(0.05)))
 
-        elif up == "N":  # Knight ↗ (horse head)
+        elif up == "N":  # Knight – clearer horse profile
             pts = [
-                (o(0.25), o(0.8)),
-                (o(0.45), o(0.3)),
-                (o(0.35), o(0.22)),
-                (o(0.6), o(0.1)),
-                (o(0.7), o(0.25)),
-                (o(0.55), o(0.35)),
-                (o(0.68), o(0.55)),
-                (o(0.5), o(0.7)),
+                (o(0.28), o(0.82)),  # bottom-left
+                (o(0.46), o(0.32)),
+                (o(0.42), o(0.18)),
+                (o(0.58), o(0.08)),  # muzzle tip
+                (o(0.74), o(0.28)),  # ear tip
+                (o(0.60), o(0.38)),
+                (o(0.74), o(0.58)),  # neck curve
+                (o(0.52), o(0.74)),
             ]
             draw_polygon(pts)
-            draw_rect(pygame.Rect(o(0.22), o(0.8), o(0.56), o(0.06)))
+            draw_rect(pygame.Rect(o(0.22), o(0.82), o(0.56), o(0.05)))
 
-        elif up == "B":  # Bishop – slimmer neck, wider base, clearer mitre
+        elif up == "B":  # Bishop – slender with pronounced mitre
             # Mitre head
             draw_circle((o(0.5), o(0.25)), o(0.15))
             # Vertical slit – draw thin transparent line
             pygame.draw.line(surf, (0, 0, 0, 0), (o(0.5), o(0.12)), (o(0.5), o(0.38)), stroke)
             # Shoulders
-            draw_rect(pygame.Rect(o(0.36), o(0.36), o(0.28), o(0.18)))
+            draw_rect(pygame.Rect(o(0.38), o(0.36), o(0.24), o(0.16)))
             # Body taper – trapezoid simulated with polygon
             draw_polygon([
                 (o(0.36), o(0.54)), (o(0.64), o(0.54)), (o(0.58), o(0.64)), (o(0.42), o(0.64))
@@ -129,12 +131,13 @@ def generate_piece_images(square_size: int):
             draw_rect(pygame.Rect(o(0.3), o(0.66), o(0.4), o(0.07)))
             draw_rect(pygame.Rect(o(0.24), o(0.75), o(0.52), o(0.05)))
 
-        elif up == "Q":  # Queen – shorter than King, elegant skirt
+        elif up == "Q":  # Queen – distinct crown & flowing gown
             # Crown pearls
-            for x in [0.34, 0.42, 0.5, 0.58, 0.66]:
-                draw_circle((o(x), o(0.15)), o(0.05))
-            # Crown band
-            draw_rect(pygame.Rect(o(0.34), o(0.20), o(0.32), o(0.04)))
+            for x in [0.3, 0.38, 0.46, 0.54, 0.62, 0.70]:
+                draw_circle((o(x), o(0.14)), o(0.05))
+            # Crown band (double)
+            draw_rect(pygame.Rect(o(0.32), o(0.19), o(0.36), o(0.03)))
+            draw_rect(pygame.Rect(o(0.34), o(0.23), o(0.32), o(0.03)))
             # Upper body orb
             draw_circle((o(0.5), o(0.30)), o(0.14))
             # Braids (three beads down each side)
@@ -144,23 +147,23 @@ def generate_piece_images(square_size: int):
                     draw_circle((bx, o(y_frac)), o(0.04))
             # Lower gown (flare)
             draw_polygon([
-                (o(0.34), o(0.38)), (o(0.66), o(0.38)), (o(0.56), o(0.62)), (o(0.44), o(0.62))
+                (o(0.3), o(0.40)), (o(0.70), o(0.40)), (o(0.58), o(0.65)), (o(0.42), o(0.65))
             ])
             # Base
             draw_rect(pygame.Rect(o(0.28), o(0.66), o(0.44), o(0.06)))
             draw_rect(pygame.Rect(o(0.2), o(0.74), o(0.6), o(0.05)))
 
-        elif up == "K":  # King – taller with higher cross and longer body
-            # Cross top
-            draw_rect(pygame.Rect(o(0.48), o(0.08), o(0.04), o(0.12)))
-            draw_rect(pygame.Rect(o(0.44), o(0.12), o(0.12), o(0.04)))
+        elif up == "K":  # King – tallest, broad base
+            # Cross top (thicker)
+            draw_rect(pygame.Rect(o(0.47), o(0.05), o(0.06), o(0.15)))
+            draw_rect(pygame.Rect(o(0.43), o(0.11), o(0.14), o(0.05)))
             # Head orb
             draw_circle((o(0.5), o(0.26)), o(0.16))
             # Body (longer than Queen)
-            draw_rect(pygame.Rect(o(0.36), o(0.34), o(0.28), o(0.36)))
+            draw_rect(pygame.Rect(o(0.34), o(0.34), o(0.32), o(0.38)))
             # Base tiers
-            draw_rect(pygame.Rect(o(0.3), o(0.72), o(0.4), o(0.06)))
-            draw_rect(pygame.Rect(o(0.24), o(0.80), o(0.52), o(0.05)))
+            draw_rect(pygame.Rect(o(0.28), o(0.72), o(0.44), o(0.05)))
+            draw_rect(pygame.Rect(o(0.22), o(0.80), o(0.56), o(0.05)))
 
         images[symbol] = surf
 
@@ -235,8 +238,28 @@ def negamax(board: chess.Board, depth: int, alpha: int, beta: int) -> int:
     return max_eval
 
 
+# Try to load Stockfish: expects binary named "stockfish" in PATH.
+try:
+    from chess.engine import SimpleEngine, Limit
+    STOCKFISH_PATH = os.getenv("STOCKFISH_PATH", "stockfish")
+    _engine: Optional["SimpleEngine"] = SimpleEngine.popen_uci(STOCKFISH_PATH)
+except Exception:
+    _engine = None
+
+
 def choose_ai_move(board: chess.Board, depth: int = 2) -> chess.Move:
-    """Return the best move for the current board using simple material search."""
+    """Return AI move. Use Stockfish if available, otherwise fallback to material search."""
+
+    if _engine:
+        try:
+            # Use skill level 5 (0-20). You can raise for harder play.
+            _engine.configure({"Skill Level": 10})
+            result = _engine.play(board, Limit(depth=depth + 6))  # deeper than DIY search
+            return result.move
+        except Exception:
+            pass  # If engine fails, fall back
+
+    # Fallback minimax
     best_move = None
     best_score = -10_000
     for move in board.legal_moves:
@@ -246,7 +269,6 @@ def choose_ai_move(board: chess.Board, depth: int = 2) -> chess.Move:
         if score > best_score:
             best_score = score
             best_move = move
-    # Fallback (shouldn't happen) to random
     return best_move if best_move else random.choice(list(board.legal_moves))
 
 
@@ -329,6 +351,8 @@ def main():
         clock.tick(FPS)
 
     pygame.quit()
+    if _engine:
+        _engine.quit()
     sys.exit()
 
 
