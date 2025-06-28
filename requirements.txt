@@ -1,5 +1,7 @@
-pygame==2.5.0
+#pygame==2.5.0
 python-chess==1.999
 cairosvg==2.7.1
 #pygame-freetype==2.6.0
-freetype-py==2.5.1
+#freetype-py==2.5.1
+fastapi==0.111.0
+uvicorn==0.30.0
