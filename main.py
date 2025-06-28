@@ -6,6 +6,7 @@ import chess
 import os
 from typing import Optional
 import json
+from menu import PositionMenu
 
 # --- Constants --------------------------------------------------------------
 BOARD_SIZE = 640  # Pixels (square board)
@@ -277,25 +278,10 @@ def choose_ai_move(board: chess.Board, depth: int = 2) -> chess.Move:
 
 def main():
     # --- Load start positions ---
-    try:
-        with open(os.path.join(os.path.dirname(__file__), "start_positions.json"), "r") as f:
-            START_POSITIONS = json.load(f)
-    except Exception:
-        START_POSITIONS = []
+    with open(os.path.join(os.path.dirname(__file__), "start_positions.json"), "r") as f:
+        START_POSITIONS = json.load(f)
 
-    if START_POSITIONS:
-        print("\nChoose a starting position (Enter for default):")
-        for pos in START_POSITIONS:
-            print(f"{pos['id']:2d}. {pos['name']} [{pos['category']}]")
-        choice = input("Your choice (number): ").strip()
-        try:
-            choice_id = int(choice)
-            match = next((p for p in START_POSITIONS if p["id"] == choice_id), None)
-        except Exception:
-            match = None
-    else:
-        match = None
-
+    # Open graphical menu before game starts
     pygame.init()
     screen = pygame.display.set_mode((BOARD_SIZE, BOARD_SIZE + STATUS_BAR_HEIGHT))
     pygame.display.set_caption("Chess Tutor – MVP")
@@ -304,10 +290,13 @@ def main():
     clock = pygame.time.Clock()
 
     board = chess.Board()
-    if match:
-        board.set_fen(match["fen"])
+    menu = PositionMenu(screen, START_POSITIONS)
+    selected = menu.run()
+
+    if selected:
+        board.set_fen(selected["fen"])
         board.clear_stack()
-        pygame.display.set_caption(f"Chess Tutor – {match['name']}")
+        pygame.display.set_caption(f"Chess Tutor – {selected['name']}")
 
     selected_sq = None
     legal_dests = set()
@@ -357,6 +346,17 @@ def main():
                         # Clicked elsewhere – reset selection
                         selected_sq = None
                         legal_dests = set()
+
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_F2:
+                # Open menu mid-game
+                menu = PositionMenu(screen, START_POSITIONS)
+                res = menu.run()
+                if res:
+                    board.set_fen(res["fen"])
+                    board.clear_stack()
+                    selected_sq = None
+                    legal_dests = set()
+                    pygame.display.set_caption(f"Chess Tutor – {res['name']}")
 
         # Draw everything
         screen.fill((0, 0, 0))
