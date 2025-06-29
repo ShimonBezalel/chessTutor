@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react';
-import { Chess } from 'chess.js';
+import { Chess, SQUARES } from 'chess.js';
 import { Chessground } from 'chessground';
-import 'chessground/assets/chessground.css';
+import "chessground/assets/chessground.base.css";
+import "chessground/assets/chessground.cburnett.css";  // pick a theme you like
 
 interface Props {
   fen: string;
@@ -14,14 +15,19 @@ export default function Board({ fen, onMove }: Props) {
   useEffect(() => {
     if (!divRef.current) return;
     const chess = new Chess(fen);
+    // Build dests Map <square, string[]> for chessground v9
+    const dests = new Map<any, string[]>();
+    SQUARES.forEach((sq: string) => {
+      const targets = chess.moves({ square: sq, verbose: true }).map((m: any) => m.to);
+      if (targets.length) dests.set(sq, targets);
+    });
+
     const cg = Chessground(divRef.current, {
       fen,
       movable: {
         free: false,
         color: chess.turn() === 'w' ? 'white' : 'black',
-        dests: Object.fromEntries(
-          chess.SQUARES.map((sq: any) => [sq, chess.moves({ square: sq, verbose: true }).map((m: any) => m.to)])
-        ),
+        dests,
         events: {
           after: (orig: string, dest: string) => onMove(orig + dest),
         },

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Board from './Board'
 import Menu from './Menu'
 import './App.css'
+import { Chess } from 'chess.js'
 
 function App() {
   const [fen, setFen] = useState<string | null>(null)
@@ -18,7 +19,18 @@ function App() {
           body: JSON.stringify({ fen, move: uci }),
         })
           .then(r => r.json())
-          .then(d => d.ok && setFen(d.fen))
+          .then(d => {
+            if (!d.ok) return;
+            setFen(d.fen);
+            const ch = new Chess(d.fen);
+            if (ch.isGameOver()) {
+              const message = ch.isCheckmate()
+                ? `Checkmate – ${ch.turn() === 'w' ? 'Black' : 'White'} wins!`
+                : 'Draw!';
+              alert(message);
+              setFen(null);
+            }
+          })
       }
     />
   )
